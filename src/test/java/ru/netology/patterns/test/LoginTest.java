@@ -21,7 +21,7 @@ public class LoginTest {
     }
 
     @Test
-    @DisplayName("Should successfully login")
+    @DisplayName("Successful login by active registered user")
     void shouldSuccessfullyLogin() {
         var registeredUser = getRegisteredUser("active");
         SelenideElement form = $(".form");
@@ -32,8 +32,8 @@ public class LoginTest {
     }
 
     @Test
-    @DisplayName("Should successfully login")
-    void test1() {
+    @DisplayName("Attempt to login a registered but blocked user")
+    void shouldGetErrorIfUserStatusBlocked() {
         var registeredUser = getRegisteredUser("blocked");
         SelenideElement form = $(".form");
         form.$("[data-test-id=login] input").setValue(registeredUser.getLogin());
@@ -45,8 +45,8 @@ public class LoginTest {
     }
 
     @Test
-    @DisplayName("Should successfully login")
-    void test2() {
+    @DisplayName("Attempt to login to unregistered user")
+    void shouldGetErrorIfUserUnregistered() {
         var notRegisteredUser = getUser("active");
         SelenideElement form = $(".form");
         form.$("[data-test-id=login] input").setValue(notRegisteredUser.getLogin());
@@ -58,8 +58,8 @@ public class LoginTest {
     }
 
     @Test
-    @DisplayName("Should successfully login")
-    void test3() {
+    @DisplayName("Attempt to login with incorrect password")
+    void shouldGetErrorIfIncorrectPassword() {
         var registeredUser = getRegisteredUser("active");
         SelenideElement form = $(".form");
         form.$("[data-test-id=login] input").setValue(registeredUser.getLogin());
@@ -71,8 +71,8 @@ public class LoginTest {
     }
 
     @Test
-    @DisplayName("Should successfully login")
-    void test4() {
+    @DisplayName("Attempt to login with incorrect login")
+    void shouldGetErrorIfIncorrectLogin() {
         var registeredUser = getRegisteredUser("active");
         SelenideElement form = $(".form");
         form.$("[data-test-id=login] input").setValue(generateLogin());
